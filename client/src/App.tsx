@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import reactLogo from './assets/react.svg';
 import viteLogo from '/vite.svg';
+import { Button } from '@/components/ui/button';
 
 // Define the type for our backend response
 interface BackendResponse {
@@ -58,12 +59,7 @@ const App: React.FC = () => {
 				</div>
 				<h1 className="text-5xl font-bold mb-8">Vite + React = 🚀</h1>
 				<div className="bg-gray-800 rounded-lg p-8 mb-8 max-w-md mx-auto">
-					<button
-						onClick={fetchData}
-						className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors"
-					>
-						Fetch Data from Backend
-					</button>
+					<Button onClick={fetchData}>Fetch Data from Backend</Button>
 					{data && (
 						<p className="mt-4 text-gray-300">
 							Data from backend: {JSON.stringify(data)}
