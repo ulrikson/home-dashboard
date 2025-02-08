@@ -27,15 +27,15 @@ const App: React.FC = () => {
 	};
 
 	return (
-		<div className="min-h-screen bg-gray-900 text-white">
+		<div className="min-h-screen bg-slate-900 text-white">
 			<div className="max-w-7xl mx-auto px-4 py-8">
 				<h1 className="text-5xl text-center font-bold mb-8">
 					Vite + React = 🚀
 				</h1>
-				<div className="bg-gray-800 rounded-lg p-8 mb-8 max-w-md mx-auto">
+				<div className="bg-slate-800 rounded-lg p-8 mb-8 max-w-md mx-auto">
 					<Button onClick={fetchData}>Fetch Data from Backend</Button>
 					{data && (
-						<p className="mt-4 text-gray-300">
+						<p className="mt-4 text-slate-300">
 							Data from backend: {JSON.stringify(data)}
 						</p>
 					)}
