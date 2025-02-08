@@ -1,44 +1,64 @@
-import React, { useState } from 'react';
-import { Button } from '@/components/ui/button';
-
-// Define the type for our backend response
-interface BackendResponse {
-	message?: string;
-	[key: string]: any; // Allow for other properties
-}
+import React from 'react';
+import {
+	Card,
+	CardContent,
+	CardDescription,
+	CardHeader,
+	CardTitle,
+} from '@/components/ui/card';
 
 const App: React.FC = () => {
-	const [data, setData] = useState<BackendResponse | null>(null);
-
-	const fetchData = async (): Promise<void> => {
-		try {
-			const response = await fetch('http://localhost:5000/');
-			if (!response.ok) {
-				throw new Error('Network response was not ok');
-			}
-			const result: BackendResponse = await response.json();
-			setData(result);
-		} catch (error) {
-			console.error(
-				'Error fetching data:',
-				error instanceof Error ? error.message : 'Unknown error'
-			);
-		}
-	};
+	const maintenanceCost = 100; // todo: fetch from backend
+	const loanCost = 100; // todo: fetch from backend
+	const totalCost = maintenanceCost + loanCost; // todo: fetch from backend
 
 	return (
-		<div className="min-h-screen bg-slate-900 text-white">
+		// todo: refactor to components
+		<div className="pt-8 min-h-screen bg-slate-900 text-white">
 			<div className="max-w-7xl mx-auto px-4 py-8">
-				<h1 className="text-5xl text-center font-bold mb-8">
-					Vite + React = 🚀
+				<h1 className="text-5xl text-center font-bold mb-12">
+					🏡 Dashboard					
 				</h1>
-				<div className="bg-slate-800 rounded-lg p-8 mb-8 max-w-md mx-auto">
-					<Button onClick={fetchData}>Fetch Data from Backend</Button>
-					{data && (
-						<p className="mt-4 text-slate-300">
-							Data from backend: {JSON.stringify(data)}
-						</p>
-					)}
+				<div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+					<Card>
+						<CardHeader>
+							<CardTitle>Maintenance Costs</CardTitle>
+							<CardDescription>
+								From object description
+							</CardDescription>
+						</CardHeader>
+						<CardContent>
+							<div className="text-2xl font-bold">
+								{maintenanceCost} SEK
+							</div>
+						</CardContent>
+					</Card>
+					<Card>
+						<CardHeader>
+							<CardTitle>Loan Costs</CardTitle>
+							<CardDescription>
+								Interest and amortization
+							</CardDescription>
+						</CardHeader>
+						<CardContent>
+							<div className="text-2xl font-bold">
+								{loanCost} SEK
+							</div>
+						</CardContent>
+					</Card>
+					<Card>
+						<CardHeader>
+							<CardTitle>Total cost</CardTitle>
+							<CardDescription>
+								Maintenance + Loan
+							</CardDescription>
+						</CardHeader>
+						<CardContent>
+							<div className="text-2xl font-bold">
+								{totalCost} SEK
+							</div>
+						</CardContent>
+					</Card>
 				</div>
 			</div>
 		</div>
