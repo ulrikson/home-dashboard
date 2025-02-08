@@ -1,6 +1,4 @@
 import React, { useState } from 'react';
-import reactLogo from './assets/react.svg';
-import viteLogo from '/vite.svg';
 import { Button } from '@/components/ui/button';
 
 // Define the type for our backend response
@@ -31,33 +29,9 @@ const App: React.FC = () => {
 	return (
 		<div className="min-h-screen bg-gray-900 text-white">
 			<div className="max-w-7xl mx-auto px-4 py-8">
-				<div className="flex justify-center space-x-8 mb-8">
-					<a
-						href="https://vite.dev"
-						target="_blank"
-						rel="noopener noreferrer"
-						className="transition-transform hover:scale-110"
-					>
-						<img
-							src={viteLogo}
-							className="h-24 p-6"
-							alt="Vite logo"
-						/>
-					</a>
-					<a
-						href="https://react.dev"
-						target="_blank"
-						rel="noopener noreferrer"
-						className="transition-transform hover:scale-110"
-					>
-						<img
-							src={reactLogo}
-							className="h-24 p-6 animate-spin-slow"
-							alt="React logo"
-						/>
-					</a>
-				</div>
-				<h1 className="text-5xl font-bold mb-8">Vite + React = 🚀</h1>
+				<h1 className="text-5xl text-center font-bold mb-8">
+					Vite + React = 🚀
+				</h1>
 				<div className="bg-gray-800 rounded-lg p-8 mb-8 max-w-md mx-auto">
 					<Button onClick={fetchData}>Fetch Data from Backend</Button>
 					{data && (
@@ -66,9 +40,6 @@ const App: React.FC = () => {
 						</p>
 					)}
 				</div>
-				<p className="text-gray-400">
-					Click on the Vite and React logos to learn more
-				</p>
 			</div>
 		</div>
 	);
