@@ -1,13 +1,13 @@
-const express = require('express');
-const mongoose = require('mongoose');
-const dotenv = require('dotenv');
-const cors = require('cors');
-const helmet = require('helmet');
+import express, { Express, Request, Response } from 'express';
+import mongoose from 'mongoose';
+import dotenv from 'dotenv';
+import cors from 'cors';
+import helmet from 'helmet';
 
 dotenv.config();
 
-const app = express();
-const port = process.env.PORT || 5000;
+const app: Express = express();
+const port: number = parseInt(process.env.PORT || '5000', 10);
 
 // Middleware
 app.use(cors());
@@ -16,7 +16,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // MongoDB connection
-const MONGODB_URI =
+const MONGODB_URI: string =
 	process.env.MONGODB_URI || 'mongodb://localhost:27017/home-dashboard';
 
 mongoose
@@ -24,14 +24,14 @@ mongoose
 	.then(() => {
 		console.log('Connected to MongoDB');
 	})
-	.catch((error) => {
+	.catch(error => {
 		console.error('Error connecting to MongoDB:', error);
 		process.exit(1);
 	});
 
 // Basic route
-app.get('/', (req, res) => {
-	res.json({ message: 'Welcome to Home Dashboard API' });
+app.get('/', (_req: Request, res: Response) => {
+	res.json({ message: 'Welcome to Home Dashboard API :D' });
 });
 
 // Start server
