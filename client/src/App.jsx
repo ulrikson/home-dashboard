@@ -3,7 +3,20 @@ import reactLogo from './assets/react.svg';
 import viteLogo from '/vite.svg';
 
 function App() {
-	const [count, setCount] = useState(0);
+	const [data, setData] = useState(null);
+
+	const fetchData = async () => {
+		try {
+			const response = await fetch('http://localhost:5000/');
+			if (!response.ok) {
+				throw new Error('Network response was not ok');
+			}
+			const result = await response.json();
+			setData(result);
+		} catch (error) {
+			console.error('Error fetching data:', error);
+		}
+	};
 
 	return (
 		<div className="min-h-screen bg-gray-900 text-white">
@@ -35,18 +48,16 @@ function App() {
 				<h1 className="text-5xl font-bold mb-8">Vite + React = 🚀</h1>
 				<div className="bg-gray-800 rounded-lg p-8 mb-8 max-w-md mx-auto">
 					<button
-						onClick={() => setCount(count => count + 1)}
+						onClick={fetchData}
 						className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors"
 					>
-						count is {count}
+						Fetch Data from Backend
 					</button>
-					<p className="mt-4 text-gray-300">
-						Edit{' '}
-						<code className="bg-gray-700 px-2 py-1 rounded">
-							src/App.jsx
-						</code>{' '}
-						and save to test HMR
-					</p>
+					{data && (
+						<p className="mt-4 text-gray-300">
+							Data from backend: {JSON.stringify(data)}
+						</p>
+					)}
 				</div>
 				<p className="text-gray-400">
 					Click on the Vite and React logos to learn more
