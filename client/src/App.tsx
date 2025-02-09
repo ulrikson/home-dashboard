@@ -7,6 +7,7 @@ import {
 	CardTitle,
 } from '@/components/ui/card';
 import { ElectricityConsumption } from '@/components/electricity-consumption';
+import { CostDistribution } from '@/components/cost-distribution';
 
 const App: React.FC = () => {
 	const maintenanceCost = 100; // todo: fetch from backend
@@ -59,6 +60,7 @@ const App: React.FC = () => {
 					</Card>
 				</div>
 				<div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-8">
+					<CostDistribution />
 					<ElectricityConsumption />
 				</div>
 			</div>
