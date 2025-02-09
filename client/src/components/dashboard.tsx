@@ -1,5 +1,5 @@
 import { CostCard } from '@/components/cost-card';
-import { ElectricityConsumption } from '@/components/charts/electricity-consumption';
+import { BarChart } from '@/components/charts/bar-chart';
 import { PieChart } from '@/components/charts/pie-chart';
 import { ChartConfig } from './ui/chart';
 
@@ -9,7 +9,8 @@ export function Dashboard() {
 	const electricityCost = 100;
 	const totalCost = maintenanceCost + loanCost + electricityCost;
 
-	const chartData = [
+	// Cost distribution data for pie chart
+	const costDistributionData = [
 		{
 			category: 'maintenance',
 			value: maintenanceCost,
@@ -23,7 +24,7 @@ export function Dashboard() {
 		},
 	];
 
-	const chartConfig = {
+	const costDistributionConfig = {
 		value: {
 			label: 'Cost',
 		},
@@ -38,6 +39,23 @@ export function Dashboard() {
 		loan: {
 			label: 'Loan',
 			color: 'hsl(var(--chart-3))',
+		},
+	} satisfies ChartConfig;
+
+	// Electricity consumption data for bar chart
+	const electricityData = [
+		{ month: 'January', consumption: 186 },
+		{ month: 'February', consumption: 305 },
+		{ month: 'March', consumption: 237 },
+		{ month: 'April', consumption: 73 },
+		{ month: 'May', consumption: 209 },
+		{ month: 'June', consumption: 214 },
+	];
+
+	const electricityConfig = {
+		consumption: {
+			label: 'Consumption',
+			color: 'hsl(var(--chart-4))',
 		},
 	} satisfies ChartConfig;
 
@@ -67,12 +85,21 @@ export function Dashboard() {
 			</div>
 			<div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-8">
 				<PieChart
-					data={chartData}
-					config={chartConfig}
+					data={costDistributionData}
+					config={costDistributionConfig}
 					title="Cost Distribution"
 					description="January - June 2024"
 				/>
-				<ElectricityConsumption />
+				<BarChart
+					data={electricityData}
+					config={electricityConfig}
+					title="Electricity Consumption"
+					description="January - June 2024"
+					xAxisKey="month"
+					dataKey="consumption"
+					barColor="var(--color-consumption)"
+					hideTooltipLabel
+				/>
 			</div>
 		</div>
 	);
