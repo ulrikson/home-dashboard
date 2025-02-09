@@ -27,7 +27,7 @@ export function CostCardList({ costs }: CostCardListProps) {
 		},
 		{
 			title: 'Total Costs',
-			description: 'Maintenance + Electricity + Loan',
+			description: 'Maintenance, Electricity, Loan',
 			cost: totalCost,
 		},
 	];

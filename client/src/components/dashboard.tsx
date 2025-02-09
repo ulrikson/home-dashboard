@@ -1,5 +1,5 @@
 import { BarChart } from '@/components/charts/bar-chart';
-import { PieChart } from '@/components/charts/pie-chart';
+import { CostDistribution } from '@/components/cost-distribution';
 import { ChartConfig } from './ui/chart';
 import { CostCardList } from '@/components/cost-card-list';
 import { CostsDTO } from '@/types/costs';
@@ -10,39 +10,6 @@ export function Dashboard() {
 		electricityCost: 100,
 		loanCost: 150,
 	};
-
-	// Cost distribution data for pie chart
-	const costDistributionData = [
-		{
-			category: 'maintenance',
-			value: costs.maintenanceCost,
-			fill: 'var(--color-maintenance)',
-		},
-		{ category: 'loan', value: costs.loanCost, fill: 'var(--color-loan)' },
-		{
-			category: 'electricity',
-			value: costs.electricityCost,
-			fill: 'var(--color-electricity)',
-		},
-	];
-
-	const costDistributionConfig = {
-		value: {
-			label: 'Cost',
-		},
-		maintenance: {
-			label: 'Maintenance',
-			color: 'hsl(var(--chart-2))',
-		},
-		electricity: {
-			label: 'Electricity',
-			color: 'hsl(var(--chart-4))',
-		},
-		loan: {
-			label: 'Loan',
-			color: 'hsl(var(--chart-3))',
-		},
-	} satisfies ChartConfig;
 
 	// Electricity consumption data for bar chart
 	const electricityData = [
@@ -67,12 +34,7 @@ export function Dashboard() {
 				<CostCardList costs={costs} />
 			</div>
 			<div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-8">
-				<PieChart
-					data={costDistributionData}
-					config={costDistributionConfig}
-					title="Cost Distribution"
-					description="January - June 2024"
-				/>
+				<CostDistribution costs={costs} />
 				<BarChart
 					data={electricityData}
 					config={electricityConfig}
