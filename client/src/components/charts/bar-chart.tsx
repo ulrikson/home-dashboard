@@ -26,9 +26,7 @@ interface BarChartProps {
 	xAxisKey: string;
 	dataKey: string;
 	className?: string;
-	hideTooltipLabel?: boolean;
 	barColor?: string;
-	xAxisFormatter?: (value: string) => string;
 }
 
 export function BarChart({
@@ -39,9 +37,7 @@ export function BarChart({
 	xAxisKey,
 	dataKey,
 	className = '',
-	hideTooltipLabel = false,
 	barColor,
-	xAxisFormatter = value => value.slice(0, 3),
 }: BarChartProps) {
 	return (
 		<Card className={className}>
@@ -61,15 +57,11 @@ export function BarChart({
 							tickLine={false}
 							tickMargin={10}
 							axisLine={false}
-							tickFormatter={xAxisFormatter}
+							tickFormatter={value => value.slice(0, 3)}
 						/>
 						<ChartTooltip
 							cursor={false}
-							content={
-								<ChartTooltipContent
-									hideLabel={hideTooltipLabel}
-								/>
-							}
+							content={<ChartTooltipContent hideLabel />}
 						/>
 						<Bar dataKey={dataKey} fill={barColor} radius={8} />
 					</RechartsBarChart>

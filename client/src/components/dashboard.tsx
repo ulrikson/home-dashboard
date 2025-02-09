@@ -98,7 +98,6 @@ export function Dashboard() {
 					xAxisKey="month"
 					dataKey="consumption"
 					barColor="var(--color-consumption)"
-					hideTooltipLabel
 				/>
 			</div>
 		</div>
