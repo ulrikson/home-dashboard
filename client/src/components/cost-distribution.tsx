@@ -10,8 +10,8 @@ import {
 import {
 	ChartConfig,
 	ChartContainer,
-	ChartTooltip,
-	ChartTooltipContent,
+	ChartLegend,
+	ChartLegendContent,
 } from '@/components/ui/chart';
 const chartData = [
 	{ category: 'maintenance', cost: 100, fill: 'var(--color-maintenance)' },
@@ -50,14 +50,14 @@ export function CostDistribution() {
 					className="mx-auto aspect-square max-h-[300px]"
 				>
 					<PieChart>
-						<ChartTooltip
-							cursor={false}
-							content={<ChartTooltipContent hideLabel />}
-						/>
 						<Pie
 							data={chartData}
 							dataKey="cost"
 							nameKey="category"
+						/>
+						<ChartLegend
+							content={<ChartLegendContent nameKey="category" />}
+							className="-translate-y-2 flex-wrap gap-2 [&>*]:basis-1/4 [&>*]:justify-center"
 						/>
 					</PieChart>
 				</ChartContainer>
