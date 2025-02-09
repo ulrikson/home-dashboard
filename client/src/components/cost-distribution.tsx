@@ -16,6 +16,7 @@ import {
 const chartData = [
 	{ category: 'maintenance', cost: 100, fill: 'var(--color-maintenance)' },
 	{ category: 'loan', cost: 150, fill: 'var(--color-loan)' },
+	{ category: 'electricity', cost: 100, fill: 'var(--color-electricity)' },
 ];
 
 const chartConfig = {
@@ -25,6 +26,10 @@ const chartConfig = {
 	maintenance: {
 		label: 'Maintenance',
 		color: 'hsl(var(--chart-2))',
+	},
+	electricity: {
+		label: 'Electricity',
+		color: 'hsl(var(--chart-4))',
 	},
 	loan: {
 		label: 'Loan',
