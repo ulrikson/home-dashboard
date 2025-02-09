@@ -15,7 +15,7 @@ import {
 } from '@/components/ui/chart';
 const chartData = [
 	{ category: 'maintenance', cost: 100, fill: 'var(--color-maintenance)' },
-	{ category: 'loan', cost: 100, fill: 'var(--color-loan)' },
+	{ category: 'loan', cost: 150, fill: 'var(--color-loan)' },
 ];
 
 const chartConfig = {

@@ -11,7 +11,7 @@ import { CostDistribution } from '@/components/cost-distribution';
 
 const App: React.FC = () => {
 	const maintenanceCost = 100; // todo: fetch from backend
-	const loanCost = 100; // todo: fetch from backend
+	const loanCost = 150; // todo: fetch from backend
 	const totalCost = maintenanceCost + loanCost; // todo: fetch from backend
 
 	return (
