@@ -25,24 +25,11 @@ interface PieChartProps {
 	config: ChartConfig;
 	title?: string;
 	description?: string;
-	valueKey?: string;
-	categoryKey?: string;
-	className?: string;
-	maxHeight?: string | number;
 }
 
-export function PieChart({
-	data,
-	config,
-	title,
-	description,
-	valueKey = 'value',
-	categoryKey = 'category',
-	className = '',
-	maxHeight = '300px',
-}: PieChartProps) {
+export function PieChart({ data, config, title, description }: PieChartProps) {
 	return (
-		<Card className={`flex flex-col ${className}`}>
+		<Card className="flex flex-col">
 			{(title || description) && (
 				<CardHeader className="items-center pb-0">
 					{title && <CardTitle>{title}</CardTitle>}
@@ -54,18 +41,12 @@ export function PieChart({
 			<CardContent className="flex-1 pb-0">
 				<ChartContainer
 					config={config}
-					className={`mx-auto aspect-square max-h-[${maxHeight}]`}
+					className={`mx-auto aspect-square max-h-[300px]`}
 				>
 					<RechartsPieChart>
-						<Pie
-							data={data}
-							dataKey={valueKey}
-							nameKey={categoryKey}
-						/>
+						<Pie data={data} dataKey="value" nameKey="category" />
 						<ChartLegend
-							content={
-								<ChartLegendContent nameKey={categoryKey} />
-							}
+							content={<ChartLegendContent nameKey="category" />}
 							className="-translate-y-2 flex-wrap gap-2 [&>*]:basis-1/4 [&>*]:justify-center"
 						/>
 					</RechartsPieChart>
