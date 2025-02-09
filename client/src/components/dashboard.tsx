@@ -1,6 +1,6 @@
 import { CostCard } from '@/components/cost-card';
 import { ElectricityConsumption } from '@/components/charts/electricity-consumption';
-import { PieChart } from '@/components/charts/cost-distribution';
+import { PieChart } from '@/components/charts/pie-chart';
 import { ChartConfig } from './ui/chart';
 
 export function Dashboard() {
