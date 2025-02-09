@@ -1,48 +1,27 @@
-import { CostCard } from '@/components/cost-card';
 import { BarChart } from '@/components/charts/bar-chart';
 import { PieChart } from '@/components/charts/pie-chart';
 import { ChartConfig } from './ui/chart';
+import { CostCardList } from '@/components/cost-card-list';
+import { CostsDTO } from '@/types/costs';
 
 export function Dashboard() {
-	const maintenanceCost = 100;
-	const loanCost = 150;
-	const electricityCost = 100;
-	const totalCost = maintenanceCost + loanCost + electricityCost;
-
-	const costCardData = [
-		{
-			title: 'Maintenance Costs',
-			description: 'From object description',
-			cost: maintenanceCost,
-		},
-		{
-			title: 'Electricity Costs',
-			description: 'From object description',
-			cost: electricityCost,
-		},
-		{
-			title: 'Loan Costs',
-			description: 'From object description',
-			cost: loanCost,
-		},
-		{
-			title: 'Total Costs',
-			description: 'Maintenance + Electricity + Loan',
-			cost: totalCost,
-		},
-	];
+	const costs: CostsDTO = {
+		maintenanceCost: 100,
+		electricityCost: 100,
+		loanCost: 150,
+	};
 
 	// Cost distribution data for pie chart
 	const costDistributionData = [
 		{
 			category: 'maintenance',
-			value: maintenanceCost,
+			value: costs.maintenanceCost,
 			fill: 'var(--color-maintenance)',
 		},
-		{ category: 'loan', value: loanCost, fill: 'var(--color-loan)' },
+		{ category: 'loan', value: costs.loanCost, fill: 'var(--color-loan)' },
 		{
 			category: 'electricity',
-			value: electricityCost,
+			value: costs.electricityCost,
 			fill: 'var(--color-electricity)',
 		},
 	];
@@ -85,14 +64,7 @@ export function Dashboard() {
 	return (
 		<div>
 			<div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-				{costCardData.map((item, index) => (
-					<CostCard
-						key={index}
-						title={item.title}
-						description={item.description}
-						cost={item.cost}
-					/>
-				))}
+				<CostCardList costs={costs} />
 			</div>
 			<div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-8">
 				<PieChart
