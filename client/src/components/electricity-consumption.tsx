@@ -1,6 +1,6 @@
 import { BarChart } from '@/components/charts/bar-chart';
 import { ChartConfig } from './ui/chart';
-import { CostsDTO } from '@/types/costs';
+import { CostsDTO } from '../../../shared/types/costs';
 
 export function ElectricityConsumption({ costs }: { costs: CostsDTO }) {
 	const electricityCost = costs.electricityCost;

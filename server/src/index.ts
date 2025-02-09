@@ -3,6 +3,7 @@ import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import cors from 'cors';
 import helmet from 'helmet';
+import { CostsDTO } from '../../shared/types/costs';
 
 dotenv.config();
 
@@ -30,8 +31,13 @@ mongoose
 	});
 
 // Basic route
-app.get('/', (_req: Request, res: Response) => {
-	res.json({ message: 'Welcome to Home Dashboard API :D' });
+app.get('/api/dashboard', (_req: Request, res: Response) => {
+	const responseData = {
+		maintenanceCost: 100,
+		electricityCost: 100,
+		loanCost: 150,
+	} satisfies CostsDTO;
+	res.json(responseData);
 });
 
 // Start server

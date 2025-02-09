@@ -1,6 +1,6 @@
 import { PieChart } from '@/components/charts/pie-chart';
 import { ChartConfig } from './ui/chart';
-import { CostsDTO } from '@/types/costs';
+import { CostsDTO } from '../../../shared/types/costs';
 
 export function CostDistribution({ costs }: { costs: CostsDTO }) {
 	const costDistributionData = [

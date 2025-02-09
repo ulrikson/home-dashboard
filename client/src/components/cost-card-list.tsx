@@ -1,5 +1,5 @@
 import { CostCard } from '@/components/cost-card';
-import { CostsDTO } from '@/types/costs';
+import { CostsDTO } from '../../../shared/types/costs';
 
 interface CostCardListProps {
 	costs: CostsDTO;
