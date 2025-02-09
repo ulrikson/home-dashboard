@@ -6,6 +6,7 @@ import {
 	CardHeader,
 	CardTitle,
 } from '@/components/ui/card';
+import { ElectricityConsumption } from '@/components/electricity-consumption';
 
 const App: React.FC = () => {
 	const maintenanceCost = 100; // todo: fetch from backend
@@ -14,7 +15,7 @@ const App: React.FC = () => {
 
 	return (
 		// todo: refactor to components
-		<div className="pt-8 min-h-screen bg-slate-900 text-white">
+		<div className="py-8 min-h-screen bg-slate-900 text-white">
 			<div className="max-w-7xl mx-auto px-4 py-8">
 				<div className="grid grid-cols-1 md:grid-cols-3 gap-8">
 					<Card>
@@ -56,6 +57,9 @@ const App: React.FC = () => {
 							</div>
 						</CardContent>
 					</Card>
+				</div>
+				<div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-8">
+					<ElectricityConsumption />
 				</div>
 			</div>
 		</div>
