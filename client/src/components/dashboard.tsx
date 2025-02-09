@@ -9,6 +9,29 @@ export function Dashboard() {
 	const electricityCost = 100;
 	const totalCost = maintenanceCost + loanCost + electricityCost;
 
+	const costCardData = [
+		{
+			title: 'Maintenance Costs',
+			description: 'From object description',
+			cost: maintenanceCost,
+		},
+		{
+			title: 'Electricity Costs',
+			description: 'From object description',
+			cost: electricityCost,
+		},
+		{
+			title: 'Loan Costs',
+			description: 'From object description',
+			cost: loanCost,
+		},
+		{
+			title: 'Total Costs',
+			description: 'Maintenance + Electricity + Loan',
+			cost: totalCost,
+		},
+	];
+
 	// Cost distribution data for pie chart
 	const costDistributionData = [
 		{
@@ -62,26 +85,14 @@ export function Dashboard() {
 	return (
 		<div>
 			<div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-				<CostCard
-					title="Maintenance Costs"
-					description="From object description"
-					cost={maintenanceCost}
-				/>
-				<CostCard
-					title="Electricity Costs"
-					description="From object description"
-					cost={electricityCost}
-				/>
-				<CostCard
-					title="Loan Costs"
-					description="From object description"
-					cost={loanCost}
-				/>
-				<CostCard
-					title="Total Costs"
-					description="Maintenance + Electricity + Loan"
-					cost={totalCost}
-				/>
+				{costCardData.map((item, index) => (
+					<CostCard
+						key={index}
+						title={item.title}
+						description={item.description}
+						cost={item.cost}
+					/>
+				))}
 			</div>
 			<div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-8">
 				<PieChart
