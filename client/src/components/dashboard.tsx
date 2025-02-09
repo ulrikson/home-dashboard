@@ -44,7 +44,7 @@ export function Dashboard() {
 					</div>
 				</>
 			) : (
-				<div>Loading...</div>
+				<div />
 			)}
 		</div>
 	);
