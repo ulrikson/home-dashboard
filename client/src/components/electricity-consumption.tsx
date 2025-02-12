@@ -1,26 +1,9 @@
-import React from 'react';
 import { BarChart } from '@/components/charts/bar-chart';
 import { ChartConfig } from './ui/chart';
-import { DashboardService } from '@/services/api.service';
-import { ElectricityConsumptionDTO } from '../../../shared/types/costs';
+import { useElectricityConsumption } from '@/hooks/useElectricityConsumption';
 
 export function ElectricityConsumption() {
-	const [electricityConsumption, setElectricityConsumption] =
-		React.useState<ElectricityConsumptionDTO | null>(null);
-
-	React.useEffect(() => {
-		const fetchElectricityConsumption = async () => {
-			try {
-				const data =
-					await DashboardService.fetchElectricityConsumption();
-				setElectricityConsumption(data);
-			} catch (error) {
-				console.error('Error fetching electricity consumption:', error);
-			}
-		};
-
-		fetchElectricityConsumption();
-	}, []);
+	const { data, error, loading } = useElectricityConsumption();
 
 	const electricityConfig = {
 		consumption: {
@@ -29,13 +12,12 @@ export function ElectricityConsumption() {
 		},
 	} satisfies ChartConfig;
 
-	if (!electricityConsumption) {
-		return null;
-	}
+	if (loading) return <div>Loading electricity consumption...</div>;
+	if (error || !data) return <div>Error fetching data</div>;
 
 	return (
 		<BarChart
-			data={electricityConsumption}
+			data={data}
 			config={electricityConfig}
 			title="Electricity Consumption"
 			description="January - June 2024"
