@@ -1,25 +1,13 @@
-import React from 'react';
 import { ElectricityConsumption } from './electricity-consumption';
 import { CostDistribution } from '@/components/cost-distribution';
 import { CostCardList } from '@/components/cost-card-list';
-import { CostsDTO } from '../../../shared/types/costs';
-import { DashboardService } from '@/services/api.service';
+import { useFetchCosts } from '@/hooks/useFetchCosts';
 
 export function Dashboard() {
-	const [costs, setCosts] = React.useState<CostsDTO | null>(null);
+	const { data: costs, error, loading } = useFetchCosts();
 
-	React.useEffect(() => {
-		const fetchCosts = async () => {
-			try {
-				const data = await DashboardService.fetchCosts();
-				setCosts(data);
-			} catch (error) {
-				console.error('Error fetching costs:', error);
-			}
-		};
-
-		fetchCosts();
-	}, []);
+	if (loading) return <div>Loading costs...</div>;
+	if (error || !costs) return <div>Error fetching costs</div>;
 
 	return (
 		<div>
