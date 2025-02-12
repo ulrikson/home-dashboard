@@ -1,4 +1,7 @@
-import { CostsDTO } from '../../../shared/types/costs';
+import {
+	CostsDTO,
+	ElectricityConsumptionDTO,
+} from '../../../shared/types/costs';
 
 const API_BASE_URL = 'http://localhost:5000/api';
 
@@ -8,7 +11,7 @@ export class DashboardService {
 		return response.json();
 	}
 
-	static async fetchElectricityConsumption(): Promise<object> {
+	static async fetchElectricityConsumption(): Promise<ElectricityConsumptionDTO> {
 		const response = await fetch(`${API_BASE_URL}/electricity-consumption`);
 		return response.json();
 	}

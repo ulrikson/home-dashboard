@@ -2,11 +2,11 @@ import React from 'react';
 import { BarChart } from '@/components/charts/bar-chart';
 import { ChartConfig } from './ui/chart';
 import { DashboardService } from '@/services/api.service';
+import { ElectricityConsumptionDTO } from '../../../shared/types/costs';
 
 export function ElectricityConsumption() {
-	const [electricityConsumption, setElectricityConsumption] = React.useState<
-		object | null
-	>(null);
+	const [electricityConsumption, setElectricityConsumption] =
+		React.useState<ElectricityConsumptionDTO | null>(null);
 
 	React.useEffect(() => {
 		const fetchElectricityConsumption = async () => {
@@ -22,30 +22,20 @@ export function ElectricityConsumption() {
 		fetchElectricityConsumption();
 	}, []);
 
-	const electricityData = [
-		{
-			month: 'January',
-			consumption: electricityConsumption?.consumption,
-		},
-		{
-			month: 'February',
-			consumption: electricityConsumption?.consumption,
-		},
-		{ month: 'March', consumption: electricityConsumption?.consumption },
-		{ month: 'April', consumption: electricityConsumption?.consumption },
-		{ month: 'May', consumption: electricityConsumption?.consumption },
-		{ month: 'June', consumption: electricityConsumption?.consumption },
-	];
-
 	const electricityConfig = {
 		consumption: {
 			label: 'Consumption',
 			color: 'hsl(var(--chart-4))',
 		},
 	} satisfies ChartConfig;
+
+	if (!electricityConsumption) {
+		return null;
+	}
+
 	return (
 		<BarChart
-			data={electricityData}
+			data={electricityConsumption}
 			config={electricityConfig}
 			title="Electricity Consumption"
 			description="January - June 2024"

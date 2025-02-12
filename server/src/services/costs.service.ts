@@ -1,4 +1,7 @@
-import { CostsDTO } from '../../../shared/types/costs';
+import {
+	CostsDTO,
+	ElectricityConsumptionDTO,
+} from '../../../shared/types/costs';
 
 export class CostsService {
 	public async getDashboardCosts(): Promise<CostsDTO> {
@@ -10,10 +13,27 @@ export class CostsService {
 		};
 	}
 
-	public async getElectricityConsumption(): Promise<object> {
+	public async getElectricityConsumption(): Promise<ElectricityConsumptionDTO> {
 		// TODO: Replace with actual database query
-		return {
-			consumption: 100,
-		};
+		return [
+			{
+				month: 'January',
+				consumption: Math.floor(Math.random() * 100),
+			},
+			{
+				month: 'February',
+				consumption: Math.floor(Math.random() * 100),
+			},
+			{
+				month: 'March',
+				consumption: Math.floor(Math.random() * 100),
+			},
+			{
+				month: 'April',
+				consumption: Math.floor(Math.random() * 100),
+			},
+			{ month: 'May', consumption: Math.floor(Math.random() * 100) },
+			{ month: 'June', consumption: Math.floor(Math.random() * 100) },
+		];
 	}
 }
