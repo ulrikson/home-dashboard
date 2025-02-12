@@ -1,46 +1,32 @@
-import express, { Express, Request, Response } from 'express';
-import mongoose from 'mongoose';
-import dotenv from 'dotenv';
+import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
-import { CostsDTO } from '../../shared/types/costs';
+import { appConfig } from './config/app.config';
+import { connectToDatabase } from './database/connection';
+import dashboardRoutes from './routes/dashboard.routes';
 
-dotenv.config();
-
-const app: Express = express();
-const port: number = parseInt(process.env.PORT || '5000', 10);
+const app = express();
 
 // Middleware
-app.use(cors());
+app.use(cors(appConfig.corsOptions));
 app.use(helmet());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// MongoDB connection
-const MONGODB_URI: string =
-	process.env.MONGODB_URI || 'mongodb://localhost:27017/home-dashboard';
+// Routes
+app.use('/api', dashboardRoutes);
 
-mongoose
-	.connect(MONGODB_URI)
-	.then(() => {
-		console.log('Connected to MongoDB');
-	})
-	.catch(error => {
-		console.error('Error connecting to MongoDB:', error);
+// Initialize server
+const startServer = async (): Promise<void> => {
+	try {
+		await connectToDatabase();
+		app.listen(appConfig.port, () => {
+			console.log(`Server is running on port ${appConfig.port}`);
+		});
+	} catch (error) {
+		console.error('Failed to start server:', error);
 		process.exit(1);
-	});
+	}
+};
 
-// Basic route
-app.get('/api/dashboard', (_req: Request, res: Response) => {
-	const responseData = {
-		maintenanceCost: 100,
-		electricityCost: 100,
-		loanCost: 150,
-	} satisfies CostsDTO;
-	res.json(responseData);
-});
-
-// Start server
-app.listen(port, () => {
-	console.log(`Server is running on port ${port}`);
-});
+startServer();
