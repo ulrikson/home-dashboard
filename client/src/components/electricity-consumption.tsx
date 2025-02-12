@@ -1,24 +1,40 @@
+import React from 'react';
 import { BarChart } from '@/components/charts/bar-chart';
 import { ChartConfig } from './ui/chart';
-import { CostsDTO } from '../../../shared/types/costs';
+import { DashboardService } from '@/services/api.service';
 
-export function ElectricityConsumption({ costs }: { costs: CostsDTO }) {
-	const electricityCost = costs.electricityCost;
-	const getConsumption = () => electricityCost * Math.random();
+export function ElectricityConsumption() {
+	const [electricityConsumption, setElectricityConsumption] = React.useState<
+		object | null
+	>(null);
+
+	React.useEffect(() => {
+		const fetchElectricityConsumption = async () => {
+			try {
+				const data =
+					await DashboardService.fetchElectricityConsumption();
+				setElectricityConsumption(data);
+			} catch (error) {
+				console.error('Error fetching electricity consumption:', error);
+			}
+		};
+
+		fetchElectricityConsumption();
+	}, []);
 
 	const electricityData = [
 		{
 			month: 'January',
-			consumption: getConsumption(),
+			consumption: electricityConsumption?.consumption,
 		},
 		{
 			month: 'February',
-			consumption: getConsumption(),
+			consumption: electricityConsumption?.consumption,
 		},
-		{ month: 'March', consumption: getConsumption() },
-		{ month: 'April', consumption: getConsumption() },
-		{ month: 'May', consumption: getConsumption() },
-		{ month: 'June', consumption: getConsumption() },
+		{ month: 'March', consumption: electricityConsumption?.consumption },
+		{ month: 'April', consumption: electricityConsumption?.consumption },
+		{ month: 'May', consumption: electricityConsumption?.consumption },
+		{ month: 'June', consumption: electricityConsumption?.consumption },
 	];
 
 	const electricityConfig = {

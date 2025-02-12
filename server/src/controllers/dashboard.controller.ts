@@ -19,4 +19,12 @@ export class DashboardController {
 			res.status(500).json({ message: 'Error fetching dashboard data' });
 		}
 	};
+
+	public getElectricityConsumption = async (
+		_req: Request,
+		res: Response
+	): Promise<void> => {
+		const consumption = await this.costsService.getElectricityConsumption();
+		res.json(consumption);
+	};
 }

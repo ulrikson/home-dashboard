@@ -3,6 +3,7 @@ import { ElectricityConsumption } from './electricity-consumption';
 import { CostDistribution } from '@/components/cost-distribution';
 import { CostCardList } from '@/components/cost-card-list';
 import { CostsDTO } from '../../../shared/types/costs';
+import { DashboardService } from '@/services/api.service';
 
 export function Dashboard() {
 	const [costs, setCosts] = React.useState<CostsDTO | null>(null);
@@ -10,19 +11,10 @@ export function Dashboard() {
 	React.useEffect(() => {
 		const fetchCosts = async () => {
 			try {
-				const response = await fetch(
-					'http://localhost:5000/api/dashboard'
-				);
-				if (!response.ok) {
-					throw new Error('Network response was not ok');
-				}
-				const data: CostsDTO = await response.json();
+				const data = await DashboardService.fetchCosts();
 				setCosts(data);
 			} catch (error) {
 				console.error('Error fetching costs:', error);
-				if (error instanceof Error) {
-					console.error('Error details:', error.message);
-				}
 			}
 		};
 
@@ -39,7 +31,7 @@ export function Dashboard() {
 					<div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-8">
 						<>
 							<CostDistribution costs={costs} />
-							<ElectricityConsumption costs={costs} />
+							<ElectricityConsumption />
 						</>
 					</div>
 				</>

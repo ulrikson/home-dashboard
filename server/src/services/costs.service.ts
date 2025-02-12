@@ -9,4 +9,11 @@ export class CostsService {
 			loanCost: 150,
 		};
 	}
+
+	public async getElectricityConsumption(): Promise<object> {
+		// TODO: Replace with actual database query
+		return {
+			consumption: 100,
+		};
+	}
 }
