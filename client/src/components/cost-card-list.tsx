@@ -12,22 +12,22 @@ export function CostCardList({ costs }: CostCardListProps) {
 	const costCardData = [
 		{
 			title: 'Maintenance Costs',
-			description: 'From object description',
+			description: 'Water, Internet, etc.',
 			cost: costs.maintenanceCost,
 		},
 		{
 			title: 'Electricity Costs',
-			description: 'From object description',
+			description: 'Electricity, Heating, etc.',
 			cost: costs.electricityCost,
 		},
 		{
 			title: 'Loan Costs',
-			description: 'From object description',
+			description: 'Loan, Taxes, etc.',
 			cost: costs.loanCost,
 		},
 		{
 			title: 'Total Costs',
-			description: 'Maintenance, Electricity, Loan',
+			description: 'Maintenance, Electricity and Loan',
 			cost: totalCost,
 		},
 	];
