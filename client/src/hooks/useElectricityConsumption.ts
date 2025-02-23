@@ -1,18 +1,36 @@
 import { useState, useEffect } from 'react';
-import { DashboardService } from '@/services/api.service';
-import { ElectricityConsumptionDTO } from '../../../shared/types/costs';
+import { ElectricityConsumptionData } from '../../../shared/types/costs';
+import pb from '@/lib/pocketbase';
 
 export function useElectricityConsumption() {
-	const [data, setData] = useState<ElectricityConsumptionDTO | null>(null);
-	const [error, setError] = useState<Error | null>(null);
+	const [data, setData] = useState<ElectricityConsumptionData[] | null>(null);
 	const [loading, setLoading] = useState(true);
+	const [error, setError] = useState<string | null>(null);
 
 	useEffect(() => {
-		DashboardService.fetchElectricityConsumption()
-			.then(setData)
-			.catch(err => setError(err))
-			.finally(() => setLoading(false));
+		const fetchElectricityConsumption = async () => {
+			try {
+				const record = await pb
+					.collection('electricityConsumption')
+					.getFullList<ElectricityConsumptionData>();
+
+				const consumptionData: ElectricityConsumptionData[] = record;
+				setData(consumptionData);
+				setError(null);
+			} catch (err) {
+				setError(
+					err instanceof Error
+						? err.message
+						: 'Failed to fetch consumption'
+				);
+				console.error('Error fetching consumption:', err);
+			} finally {
+				setLoading(false);
+			}
+		};
+
+		fetchElectricityConsumption();
 	}, []);
 
-	return { data, error, loading };
+	return { data, loading, error };
 }
