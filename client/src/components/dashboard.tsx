@@ -4,10 +4,9 @@ import { CostCardList } from '@/components/cost-card-list';
 import { useFetchCosts } from '@/hooks/useFetchCosts';
 
 export function Dashboard() {
-	const { data: costs, error, loading } = useFetchCosts();
+	const { data: costs, loading } = useFetchCosts();
 
 	if (loading) return <div>Loading costs...</div>;
-	if (error || !costs) return <div>Error fetching costs</div>;
 
 	return (
 		<div>
