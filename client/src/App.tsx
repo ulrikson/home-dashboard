@@ -16,12 +16,12 @@ const App: React.FC = () => {
 			<div className="max-w-7xl mx-auto px-4 py-8">
 				{isAuthenticated ? (
 					<>
-						<div className="flex justify-end mb-4">
-							<Button onClick={logout} variant="outline">
+						<Dashboard />
+						<div className="flex justify-end mt-4">
+							<Button onClick={logout} variant="destructive">
 								Logout
 							</Button>
 						</div>
-						<Dashboard />
 					</>
 				) : (
 					<Login />
