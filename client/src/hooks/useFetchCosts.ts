@@ -1,18 +1,23 @@
 import { useState, useEffect } from 'react';
-import { DashboardService } from '@/services/api.service';
 import { CostsDTO } from '../../../shared/types/costs';
+
+const MOCK_COSTS: CostsDTO = {
+	maintenanceCost: 100,
+	electricityCost: 100,
+	loanCost: 150,
+};
 
 export function useFetchCosts() {
 	const [data, setData] = useState<CostsDTO | null>(null);
-	const [error, setError] = useState<Error | null>(null);
 	const [loading, setLoading] = useState(true);
 
 	useEffect(() => {
-		DashboardService.fetchCosts()
-			.then(setData)
-			.catch(err => setError(err))
-			.finally(() => setLoading(false));
+		// Simulate async behavior
+		setTimeout(() => {
+			setData(MOCK_COSTS);
+			setLoading(false);
+		}, 100);
 	}, []);
 
-	return { data, error, loading };
+	return { data, loading };
 }
