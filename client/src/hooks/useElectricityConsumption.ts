@@ -1,26 +1,36 @@
 import { useState, useEffect } from 'react';
-import { ElectricityConsumptionDTO } from '../../../shared/types/costs';
-
-const MOCK_CONSUMPTION: ElectricityConsumptionDTO = [
-	{ month: 'January', consumption: 75 },
-	{ month: 'February', consumption: 82 },
-	{ month: 'March', consumption: 65 },
-	{ month: 'April', consumption: 70 },
-	{ month: 'May', consumption: 85 },
-	{ month: 'June', consumption: 90 },
-];
+import { ElectricityConsumptionData } from '../../../shared/types/costs';
+import pb from '@/lib/pocketbase';
 
 export function useElectricityConsumption() {
-	const [data, setData] = useState<ElectricityConsumptionDTO | null>(null);
+	const [data, setData] = useState<ElectricityConsumptionData[] | null>(null);
 	const [loading, setLoading] = useState(true);
+	const [error, setError] = useState<string | null>(null);
 
 	useEffect(() => {
-		// Simulate async behavior
-		setTimeout(() => {
-			setData(MOCK_CONSUMPTION);
-			setLoading(false);
-		}, 100);
+		const fetchElectricityConsumption = async () => {
+			try {
+				const record = await pb
+					.collection('electricityConsumption')
+					.getFullList<ElectricityConsumptionData>();
+
+				const consumptionData: ElectricityConsumptionData[] = record;
+				setData(consumptionData);
+				setError(null);
+			} catch (err) {
+				setError(
+					err instanceof Error
+						? err.message
+						: 'Failed to fetch consumption'
+				);
+				console.error('Error fetching consumption:', err);
+			} finally {
+				setLoading(false);
+			}
+		};
+
+		fetchElectricityConsumption();
 	}, []);
 
-	return { data, loading };
+	return { data, loading, error };
 }
